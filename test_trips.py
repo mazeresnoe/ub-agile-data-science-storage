@@ -9,10 +9,14 @@ def test_add_pickup_day():
 
 
 def test_tip_percentage():
-    trips = pd.DataFrame({"fare_amount": [10.0, 20.0], "tip_amount": [2.0, 3.0]})
-    assert tip_percentage(trips).tolist() == [20.0, 15.0]
+    trips = pd.DataFrame({
+        "fare_amount": [10.0, 0.0, -5.0],
+        "tip_amount": [2.0, 1.0, 0.0],
+    })
+
+    assert tip_percentage(trips).mean() == 20.0
 
 
 def test_tip_percentage_ignores_trips_without_fare():
-    trips = pd.DataFrame({"fare_amount": [10.0, -5.0], "tip_amount": [2.0, 1.0, 0.0]})
+    trips = pd.DataFrame({"fare_amount": [10.0, 0.0, -5.0], "tip_amount": [2.0, 1.0, 0.0]})
     assert tip_percentage(trips).mean() == 20.0

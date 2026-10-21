@@ -8,5 +8,10 @@ def add_pickup_day(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def tip_percentage(df: pd.DataFrame) -> pd.Series:
-    paid = df[df["fare_amount"] > 0]
-    return df["tip_amount"] * 100 / df["fare_amount"]
+    valid_fares = df["fare_amount"] > 0
+
+    return (
+        df.loc[valid_fares, "tip_amount"]
+        * 100
+        / df.loc[valid_fares, "fare_amount"]
+    )
