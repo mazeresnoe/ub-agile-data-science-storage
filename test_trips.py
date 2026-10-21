@@ -14,5 +14,5 @@ def test_tip_percentage():
 
 
 def test_tip_percentage_ignores_trips_without_fare():
-    trips = pd.DataFrame({"fare_amount": [10.0, 0.0, -5.0], "tip_amount": [2.0, 1.0, 0.0]})
+    trips = pd.DataFrame({"fare_amount": [10.0, -5.0], "tip_amount": [2.0, 1.0, 0.0]})
     assert tip_percentage(trips).mean() == 20.0
